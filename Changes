@@ -1,6 +1,8 @@
 Revision history for Dist-Zilla-Plugin-Github-UploadRelease
 
 {{$NEXT}}
+ - Spit out File::LibMagic and hardcode content-type
+ -  Add dependency for Git::Tag plugin
 
 0.001 2016-05-01
  - Inital release
