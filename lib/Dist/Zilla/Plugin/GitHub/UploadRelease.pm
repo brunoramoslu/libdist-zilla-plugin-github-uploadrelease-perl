@@ -12,7 +12,6 @@ use Moose;
 use Try::Tiny;
 use Git::Wrapper;
 use File::Basename;
-use File::LibMagic 1.15;
 use File::Slurp qw(read_file);
 use MIME::Base64 qw(encode_base64);
 
@@ -110,9 +109,6 @@ sub after_release {
     my ($login) = $self->_get_credentials(1);
     return unless $login;
 
-    my $magic = File::LibMagic->new();
-    my $info = $magic->info_from_filename("$archive");
-
     my $repo_name = $self->_get_repo_name($login);
 
     my $git_tag_plugin = $self->zilla->plugin_named('Git::Tag') // $self->log_fatal('Plugin Git::Tag not found');
@@ -136,7 +132,7 @@ sub after_release {
     my $payload = read_file($archive);
 
     $self->log("Upload $archive to GitHub");
-    $result = $self->_api_request(POST => $upload_url, $payload, { 'Content-Type' => $info->{mime_type} });
+    $result = $self->_api_request(POST => $upload_url, $payload, { 'Content-Type' => 'application/gzip' });
 
     $status = $self->_last_status;
     if ($status ne 201) {
