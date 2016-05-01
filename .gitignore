@@ -1,0 +1,5 @@
+.*
+*~
+!.gitignore
+/Dist-Zilla-Plugin-GitHub-UploadRelease-*
+/Test/
