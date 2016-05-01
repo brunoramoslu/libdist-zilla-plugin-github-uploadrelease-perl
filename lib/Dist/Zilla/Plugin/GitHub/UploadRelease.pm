@@ -16,6 +16,8 @@ use File::Slurp qw(read_file);
 use MIME::Base64 qw(encode_base64);
 
 use Dist::Zilla::Plugin::GitHub ();
+use Dist::Zilla::Plugin::Git::Tag ();
+
 extends 'Dist::Zilla::Plugin::GitHub';
 
 with 'Dist::Zilla::Role::AfterRelease';
